@@ -15,7 +15,7 @@ function App() {
       for (let j = 0; j < inputValue; j++) {
         row.push("");
       }
-      arr.push(row);https://repl.it/@aneagoie/DataStructure-Array-Implementation
+      arr.push(row);
     }
 
     setBtn(arr);
