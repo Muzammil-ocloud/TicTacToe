@@ -86,7 +86,7 @@
   align-items: center;
   height: 100vh;
 }
-form {
+.form1 {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -98,7 +98,7 @@ label {
   font-weight: bold;
   margin-bottom: 30px;
 }
-input[type="number"] {
+.input {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -122,6 +122,15 @@ input[type="submit"] {
   padding: 0.25em 0.5em;
   box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
     5px 5px 0px 0px;
+}
+.error {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: red;
+  height: 50px;
+  margin-top: 40px;
 }
 @media (min-width: 768px) {
   .button-54 {

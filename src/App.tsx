@@ -5,24 +5,30 @@ function App() {
   const [turn, setTurn] = useState<number>(1);
   const [inputValue, setInputValue] = useState<number>(0);
   const [input, setInput] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
   const handleChange = (e: any) => {
     setInputValue(e.target.value);
   };
   const handleClick = () => {
-    let arr: string[][] = [];
-    for (let i = 0; i < inputValue; i++) {
-      let row = [];
-      for (let j = 0; j < inputValue; j++) {
-        row.push("");
+    if (inputValue > 1 && inputValue < 50) {
+      let arr: string[][] = [];
+      for (let i = 0; i < inputValue; i++) {
+        let row = [];
+        for (let j = 0; j < inputValue; j++) {
+          row.push("");
+        }
+        arr.push(row);
       }
-      arr.push(row);
-    }
 
-    setBtn(arr);
-    setWinText("");
-    setTurn(1);
-    setTurnText("Player 1 turn");
-    setInput(false);
+      setBtn(arr);
+      setWinText("");
+      setTurn(1);
+      setTurnText("Player 1 turn");
+      setInput(false);
+    } else {
+      setErrorMessage("Please enter a valid number between 1 and 50");
+    }
   };
   const [turnText, setTurnText] = useState<string>("Player 1 turn");
   const [btn, setBtn] = useState<string[][]>([]);
@@ -122,11 +128,12 @@ function App() {
     <div>
       {input ? (
         <div className="form">
-          <form>
+          <div className="form1">
             <label>Enter a Number</label>
-            <input type="number" min={2} onChange={handleChange} />
+            <input className="input" onChange={handleChange} />
             <input type="submit" onClick={handleClick} />
-          </form>
+            <div className="error">{errorMessage}</div>
+          </div>
         </div>
       ) : (
         <div className="App">
