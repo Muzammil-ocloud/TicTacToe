@@ -18,7 +18,8 @@
   top: 50px;
   text-transform: uppercase;
   color: blue;
-  height: 120px;
+  height: 50px;
+  margin-bottom: 100px;
 }
 .playArea {
   display: flex;
