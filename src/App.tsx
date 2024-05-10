@@ -3,52 +3,83 @@ import "./App.css";
 
 function App() {
   const [turn, setTurn] = useState<number>(1);
-  const [turnText, setTurnText] = useState<string>("Player 1 turn");
-  const [btn, setBtn] = useState<string[]>([
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-  ]);
-  const [winText, setWinText] = useState<string>("");
-  let checkWinner = (turn: string, arr: string[]): boolean => {
-    if (
-      (arr[0] === turn && arr[1] === turn && arr[2] === turn) ||
-      (arr[0] === turn && arr[3] === turn && arr[6] === turn) ||
-      (arr[0] === turn && arr[4] === turn && arr[8] === turn) ||
-      (arr[1] === turn && arr[4] === turn && arr[7] === turn) ||
-      (arr[2] === turn && arr[4] === turn && arr[6] === turn) ||
-      (arr[2] === turn && arr[5] === turn && arr[8] === turn) ||
-      (arr[3] === turn && arr[4] === turn && arr[5] === turn) ||
-      (arr[6] === turn && arr[7] === turn && arr[8] === turn)
-    )
-      return true;
-    else return false;
+  const [inputValue, setInputValue] = useState<number>(0);
+  const [input, setInput] = useState<boolean>(true);
+  const handleChange = (e: any) => {
+    setInputValue(e.target.value);
   };
-  let checkDraw = (arr: string[]): boolean => {
+  const handleClick = () => {
+    let arr: string[][] = [];
+    for (let i = 0; i < inputValue; i++) {
+      let row = [];
+      for (let j = 0; j < inputValue; j++) {
+        row.push("");
+      }
+      arr.push(row);https://repl.it/@aneagoie/DataStructure-Array-Implementation
+    }
+
+    setBtn(arr);
+    setWinText("");
+    setTurn(1);
+    setTurnText("Player 1 turn");
+    setInput(false);
+  };
+  const [turnText, setTurnText] = useState<string>("Player 1 turn");
+  const [btn, setBtn] = useState<string[][]>([]);
+  const [winText, setWinText] = useState<string>("");
+  let checkWinner = (turn: string, arr: string[][]): boolean => {
+    //Horizontal win check
+    for (let i = 0; i < inputValue; i++) {
+      let count: number = 0;
+      for (let j = 0; j < inputValue; j++) {
+        if (arr[i][j] === turn) count++;
+      }
+      if (count == inputValue) return true;
+    }
+    //Vertical win check
+
+    for (let i = 0; i < inputValue; i++) {
+      let count: number = 0;
+      for (let j = 0; j < inputValue; j++) {
+        if (arr[j][i] === turn) count++;
+      }
+      if (count == inputValue) return true;
+    }
+    //Left Diagonal win check
+    let count: number = 0;
+    for (let i = 0; i < inputValue; i++) {
+      if (arr[i][i] === turn) count++;
+    }
+    if (count == inputValue) return true;
+    //Right Diagonal win check
+
+    count = 0;
+    let j: number = inputValue - 1;
+    for (let i = 0; i < inputValue; i++) {
+      if (arr[i][j] === turn) count++;
+      j--;
+    }
+    if (count == inputValue) return true;
+    console.log(count);
+    console.log(inputValue);
+    //return it not win
+    return false;
+  };
+  let checkDraw = (arr: string[][]): boolean => {
     let check: boolean = true;
     arr.forEach((val) => {
-      if (val === "") check = false;
+      val.forEach((v) => {
+        if (v === "") check = false;
+      });
     });
     return check;
   };
 
-  const reset = () => {
-    setBtn(["", "", "", "", "", "", "", "", ""]);
-    setWinText("");
-    setTurn(1);
-    setTurnText("Player 1 turn");
-  };
-  const btnClick = (box: number) => {
+  const btnClick = (box: number, box2: number) => {
     if (turn === 1) {
       let newArr = [...btn];
-      if (newArr[box] === "" && winText === "") {
-        newArr[box] = "X";
+      if (newArr[box][box2] === "" && winText === "") {
+        newArr[box][box2] = "X";
         setBtn(newArr);
         let win: boolean = checkWinner("X", newArr);
 
@@ -67,8 +98,8 @@ function App() {
       }
     } else {
       let newArr = [...btn];
-      if (newArr[box] === "" && winText === "") {
-        newArr[box] = "O";
+      if (newArr[box][box2] === "" && winText === "") {
+        newArr[box][box2] = "O";
         setBtn(newArr);
         let win: boolean = checkWinner("O", newArr);
 
@@ -88,50 +119,46 @@ function App() {
     }
   };
   return (
-    <div className="App">
-      <div className="heading">Tic Tac Toe</div>
-      <div className="heading1">{turnText}</div>
-      <div className="playArea">
-        <div className="row">
-          <div className="btn" onClick={() => btnClick(0)}>
-            {btn[0]}
+    <div>
+      {input ? (
+        <div className="form">
+          <form>
+            <label>Enter a Number</label>
+            <input type="number" min={2} onChange={handleChange} />
+            <input type="submit" onClick={handleClick} />
+          </form>
+        </div>
+      ) : (
+        <div className="App">
+          <div className="heading">Tic Tac Toe</div>
+          <div className="heading1">{turnText}</div>
+          <div className="playArea">
+            {btn.map((value, index) => {
+              return (
+                <div key={index} className="row">
+                  {value.map((val, i) => {
+                    return (
+                      <div
+                        key={i}
+                        className="btn"
+                        onClick={() => btnClick(index, i)}
+                      >
+                        {val}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
           </div>
-          <div className="btn" onClick={() => btnClick(1)}>
-            {btn[1]}
-          </div>
-          <div className="btn" onClick={() => btnClick(2)}>
-            {btn[2]}
+          <div className="winText">{winText}</div>
+          <div className="btnDiv">
+            <button className="button-54" onClick={handleClick}>
+              Reset
+            </button>
           </div>
         </div>
-        <div className="row">
-          <div className="btn" onClick={() => btnClick(3)}>
-            {btn[3]}
-          </div>
-          <div className="btn" onClick={() => btnClick(4)}>
-            {btn[4]}
-          </div>
-          <div className="btn" onClick={() => btnClick(5)}>
-            {btn[5]}
-          </div>
-        </div>
-        <div className="row">
-          <div className="btn" onClick={() => btnClick(6)}>
-            {btn[6]}
-          </div>
-          <div className="btn" onClick={() => btnClick(7)}>
-            {btn[7]}
-          </div>
-          <div className="btn" onClick={() => btnClick(8)}>
-            {btn[8]}
-          </div>
-        </div>
-      </div>
-      <div className="winText">{winText}</div>
-      <div className="btnDiv">
-        <button className="button-54" onClick={reset}>
-          Reset
-        </button>
-      </div>
+      )}
     </div>
   );
 }
