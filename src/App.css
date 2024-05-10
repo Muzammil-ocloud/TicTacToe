@@ -8,22 +8,24 @@
   text-align: center;
   top: 150px;
   text-transform: uppercase;
+  height: 200px;
 }
 .heading1 {
   position: relative;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  top: 195px;
+  top: 50px;
   text-transform: uppercase;
   color: blue;
+  height: 120px;
 }
 .playArea {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 800px;
+  height: auto;
   gap: 20px;
 }
 .row {
@@ -47,24 +49,23 @@
   background-color: rgb(16, 15, 15);
 }
 .winText {
+  margin-top: 30px;
   color: green;
   text-align: center;
-  position: relative;
-  bottom: 200px;
   font-size: 50px;
   font-weight: bold;
 }
 
 .btnDiv {
   display: flex;
+  height: 150px;
   justify-content: center;
   align-items: center;
 }
 .button-54 {
-  position: relative;
-  bottom: 150px;
   width: 150px;
   height: 40px;
+  margin-top: 30px;
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
   font-weight: bold;
@@ -77,12 +78,50 @@
   padding: 0.25em 0.5em;
   box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
     5px 5px 0px 0px;
-  position: relative;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
 }
-
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+label {
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 35px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 25px;
+}
+input[type="submit"] {
+  margin-top: 20px;
+  width: 150px;
+  height: 40px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
+    5px 5px 0px 0px;
+}
 @media (min-width: 768px) {
   .button-54 {
     padding: 0.25em 0.75em;
