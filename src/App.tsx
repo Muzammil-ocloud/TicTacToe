@@ -130,7 +130,7 @@ function App() {
         <div className="form">
           <div className="form1">
             <label>Enter a Number</label>
-            <input className="input" onChange={handleChange} />
+            <input type="number" onChange={handleChange} />
             <input type="submit" onClick={handleClick} />
             <div className="error">{errorMessage}</div>
           </div>

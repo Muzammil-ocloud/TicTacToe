@@ -98,7 +98,12 @@ label {
   font-weight: bold;
   margin-bottom: 30px;
 }
-.input {
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -106,7 +111,9 @@ label {
   border-radius: 5px;
   box-sizing: border-box;
   font-size: 25px;
+  -moz-appearance: textfield;
 }
+
 input[type="submit"] {
   margin-top: 20px;
   width: 150px;
